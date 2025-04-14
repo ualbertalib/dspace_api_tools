@@ -199,25 +199,25 @@ The steps to set up a validation run.
 
     # DSpace export: communities
     ./venv/bin/python3 src/dspace_api_exports.py \
-        --output ${SCHOLARIS_DIR}/scholaris_communities.csv \
+        --output ~/Downloads/scholaris_communities.csv \
         --logging_level ERROR \
         --dso_type communities
 
-    # Dspace export: collections
+    # Dspace export: collections 
     ./venv/bin/python3 src/dspace_api_exports.py \
-        --output ${SCHOLARIS_DIR}/scholaris_collections.csv \
+        --output ~/Downloads/scholaris_collections.csv \
         --logging_level ERROR \
         --dso_type collections
 
-    # DSpace export: items
+    # DSpace export: items 
     ./venv/bin/python3 src/dspace_api_exports.py \
-        --output ${SCHOLARIS_DIR}/scholaris_items.csv \
+        --output ~/Downloads/scholaris_items.csv \
         --logging_level ERROR \
-        --dso_type items
-
-    # DSpace export: bitstreams
+        --dso_type items 
+        
+    # DSpace export: bibstreams 
     ./venv/bin/python3 src/dspace_api_exports.py \
-        --output ${SCHOLARIS_DIR}/scholaris_bitstreams.csv \
+        --output ~/Downloads/scholaris_bitstreams.csv \
         --logging_level ERROR \
         --dso_type bitstreams
 
