@@ -3,8 +3,5 @@ services:
         container_name: redirects-test
         ports:
             - '8080:80'
-        volumes:
-            - './apache:/usr/local/apache2/htdocs/'
-            - './apache/httpd.conf:/usr/local/apache2/conf/httpd.conf'
         image: 'httpd:latest'
         restart: always
