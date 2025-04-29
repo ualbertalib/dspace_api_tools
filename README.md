@@ -431,3 +431,40 @@ Test file permissions 2025-03-19:
 
 * <http://198.168.187.81:4000/collections/c3c2d7e6-4efa-43f5-8345-0b6aa16d2af9>
 * <https://ualberta-dev.scholaris.ca/collections/f2190650-69ee-4989-a5f9-399251c3314b>
+
+
+## Generating Redirect Map Files
+
+First use the dspace_api_exports.py to generate item, collection and communities.
+
+We will create the following map files:
+* jupiter_item_uuid.map
+* jupiter_collection_uuid.map
+* jupiter_community_uuid.map
+* hydranorth_item_noid.map
+* hydranorth_community_collection_noid.map
+* fedora3_item_uuid.map
+* fedora3_collection_uuid.map
+* fedora3_community_uuid.map
+```
+for each collection in scholaris_communities.csv do
+  jupiter_collection_uuid
+  hydranorth_community_collection_noid
+  fedora3_collection_uuid.map
+end
+```
+```
+for each community in scholaris_communities.csv do
+  jupiter_community_uuid
+  hydranorth_community_collection_noid
+  fedora3_community_uuid.map
+end
+```
+```
+for each item in scholaris_communities.csv do
+  jupiter_item_uuid.map
+  hydranorth
+  fedora3_item_uuid.map
+end
+```
+convert to hash maps `httxt2dbm -i conf/jupiter_community_uuid.map -o conf/jupiter_community_uuid.dbm`
