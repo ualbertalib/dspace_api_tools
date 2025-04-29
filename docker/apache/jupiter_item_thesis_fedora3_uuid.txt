@@ -1,3 +1,0 @@
-uuid:516c7f3c-f42b-453f-8df2-79c029d6c034 https://ualberta-dev.scholaris.ca/handle/123456789/991
-uuid:d64eb93e-7fd5-4dad-a515-4b18b52c1b1b https://ualberta-dev.scholaris.ca/handle/123456789/225
-uuid:d04b3b74-211d-4939-9660-c390958fa2ee https://ualberta-dev.scholaris.ca/handle/123456789/223
