@@ -446,25 +446,18 @@ We will create the following map files:
 * fedora3_item_uuid.map
 * fedora3_collection_uuid.map
 * fedora3_community_uuid.map
+
 ```
-for each collection in scholaris_communities.csv do
-  jupiter_collection_uuid
-  hydranorth_community_collection_noid
-  fedora3_collection_uuid.map
-end
+ruby httpd_map_scripts/community_map_generator.rb 
+ruby httpd_map_scripts/collections_map_generator.rb 
+ruby httpd_map_scripts/item_thesis_map_generator.rb 
 ```
-```
-for each community in scholaris_communities.csv do
-  jupiter_community_uuid
-  hydranorth_community_collection_noid
-  fedora3_community_uuid.map
-end
-```
-```
-for each item in scholaris_communities.csv do
-  jupiter_item_uuid.map
-  hydranorth
-  fedora3_item_uuid.map
-end
-```
+
 convert to hash maps `httxt2dbm -i conf/jupiter_community_uuid.map -o conf/jupiter_community_uuid.dbm`
+requires `sudo apt install apache2-utils`
+```
+#!/bin/bash
+for f in tmp/*.map; do
+  httxt2dbm -i $f -o docker/apache/$f.dbm
+done
+```
