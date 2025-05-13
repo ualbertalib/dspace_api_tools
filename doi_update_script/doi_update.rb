@@ -16,7 +16,7 @@ class Item < ActiveRecord::Base
 
   def update_doi
     begin
-      url = URI("https://api.datacite.org/dois/#{CGI.escape(doi)}")
+      url = URI("#{ENV['DATACITE_API_ENDPOINT']}/dois/#{CGI.escape(doi)}")
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = true
 
@@ -38,7 +38,7 @@ class Item < ActiveRecord::Base
       self.status = 'fail'
       self.error_message = e.message
       self.response_mesage = response.body if response
-      save
+      self.save
     end
   end
 end
