@@ -14,21 +14,32 @@ ActiveRecord::Base.establish_connection(
 
 class Item < ActiveRecord::Base
 
-  def updatate_doi
-    url = URI("https://api.test.datacite.org/dois/#{CGI.escape(doi)}")
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
+  def update_doi
+    begin
+      url = URI("https://api.datacite.org/dois/#{CGI.escape(doi)}")
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
 
-    request = Net::HTTP::Put.new(url)
-    request["accept"] = 'application/vnd.api+json'
-    request["content-type"] = 'application/json'
-    request.basic_auth(ENV['DATACITE_USERNAME'], ENV['DATACITE_PASSWORD'])
-    request.body = "{\"data\":{\"type\":\"dois\",\"attributes\":{\"url\":\"https://ualberta-dev.scholaris.ca/handle/#{handle}\"}}}"
+      request = Net::HTTP::Put.new(url)
+      request["accept"] = 'application/vnd.api+json'
+      request["content-type"] = 'application/json'
+      request.basic_auth(ENV['DATACITE_USERNAME'], ENV['DATACITE_PASSWORD'])
+      request.body = "{\"data\":{\"type\":\"dois\",\"attributes\":{\"url\":\"https://ualberta-dev.scholaris.ca/handle/#{handle}\"}}}"
 
-    puts request.to_hash
-    puts request.body
-    #response = http.request(request)
-    #puts response.read_body
+      response = http.request(request)
+      if response.kind_of? Net::HTTPSuccess
+        self.status = 'success'
+      else
+        self.status = 'fail'
+      end
+      self.response_message = response.body
+      self.save
+    rescue StandardError => e
+      self.status = 'fail'
+      self.error_message = e.message
+      self.response_mesage = response.body if response
+      save
+    end
   end
 end
 
@@ -41,6 +52,7 @@ if @first_run
       t.string :doi
       t.string :handle
       t.string :status
+      t.string :response_message
       t.string :error_message
       t.timestamps
     end
@@ -49,18 +61,21 @@ if @first_run
   end
 end
 
-# initialize the database
-if Item.count == 0
-  CSV.foreach("tmp/scholaris_items.csv", headers: true) do |row|
-    binding.pry
-    next unless row['metadata.dc.identifier.doi']
-    doi = row['metadata.dc.identifier.doi'].sub("https://doi.org/", "")[0]
+# initialize/update the database
+CSV.foreach("tmp/historical_item_ids.csv", headers: true) do |row|
+  next if row['scholaris handle'] == '#N/A'
+  begin
+    doi = row['doi'].sub('doi:', '')
     unless Item.exists?(doi: doi)
-      item = Item.new(doi: doi, handle: row['handle'], status: 'pending') 
+      item = Item.new(doi: doi, handle: row['scholaris handle'], status: 'pending') 
       item.save
       print '.'
     end
+  rescue StandardError => e
+    puts e.message
   end
 end
+
+
 
 binding.pry
