@@ -84,7 +84,7 @@ end
 
 
 count = 0
-Item.where(status: 'pending').each do |item|
+Item.where(status: 'pending').find_each do |item|
   item.update_doi
   print '.'
   count+= 1
