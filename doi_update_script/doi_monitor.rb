@@ -81,12 +81,4 @@ CSV.foreach("tmp/historical_item_ids.csv", headers: true) do |row|
   end
 end
 
-
-
-count = 0
-Item.where(status: 'pending').each do |item|
-  item.update_doi
-  print '.'
-  count+= 1
-  puts "success: #{Item.where(status: 'success').count}, failures: #{Item.where(status: 'fail').count}, pending #{Item.where(status: 'pending').count}" if count % 500 == 0
-end
+binding.pry
