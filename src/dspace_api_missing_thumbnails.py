@@ -6,7 +6,7 @@
 #     https://github.com/the-library-code/dspace-rest-python/blob/main/dspace_rest_client/client.py
 # usage:
 #  ./venv/bin/python src/dspace_api_missing_thumbnails.py \
-#      --logging_level DEBUG 
+#      --logging_level DEBUG \
 #      --output /tmp/missing_thumbnails.txt
 # license: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
 # date: July 25, 2025
@@ -16,15 +16,12 @@ import argparse
 import logging
 import os
 import pathlib
-
-# from dspace_rest_client.client import DSpaceClient
-from dspace_rest_client.models import Item
+import sys
 
 from utils import utilities as utils
 from utils.dspace_rest_client_local import DSpaceClientLocal
 
 DSPACE_CLIENT_TOKEN_REFRESH = 500
-
 
 
 def parse_args():
@@ -41,6 +38,7 @@ def parse_args():
     )
 
     return parser.parse_args()
+
 
 #
 def process(dspace_client, output_file, args):
@@ -61,7 +59,7 @@ def process(dspace_client, output_file, args):
         if item.embedded["thumbnail"] is None:
             logging.info("%s (%s)", item.name, item.uuid)
             output_file.write(f"{item.uuid}\n")
-    
+
 
 def main():
     """
@@ -104,9 +102,6 @@ def main():
         process(dspace_client, output_file, args)
 
 
-
 #
 if __name__ == "__main__":
     main()
-
-

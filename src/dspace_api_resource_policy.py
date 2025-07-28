@@ -74,7 +74,7 @@ def update_item_resource_policy(dspace_client, item_id, resource_policy, embargo
     http://localhost:8080/server/api/authz/resourcepolicies/270
     """
 
-    # This code is based on the starting state and instructions described in this document: 
+    # This code is based on the starting state and instructions described in this document:
     # https://tdl-ir.tdl.org/server/api/core/bitstreams/aa922a36-e9cd-4bc6-811d-f78a230cf86d/content
     # The above document describes one starting state but I suspect there are other possible
     # starting states. The code flow is gathered from using the web UI and viewing the web request
