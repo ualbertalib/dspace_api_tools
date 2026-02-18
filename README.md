@@ -26,7 +26,7 @@ References for using the DSpace API
 
 For those interested in the DSpace API usage, [./src](./src/) directory contains some scripts used as part of the migration audit process. Examples include:
 
-* [dsapce_api_experts.py](#dspace_api_exportspy): bulk exporting content metadata (community, collection, item, and bitstream objects) from DSpace using the API and storing as CSV -- we used to audit but could be used for other purposes.
+* [dsapce_api_exports.py](#dspace_api_exportspy): bulk exporting content metadata (community, collection, item, and bitstream objects) from DSpace using the API and storing as CSV -- we used to audit but could be used for other purposes.
 * Experimental delete item script: [delete_via_api.py](./src/delete_via_api.py)
 * Experimental resource policy creator: [dspace_api_resource_policy.py](./src/dspace_api_resource_policy.py)
 * Experimental bitsream access control tester: [bistream_access_control_test.py](./src/bitstream_access_control_test.py)
