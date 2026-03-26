@@ -544,7 +544,8 @@ The assumption is the number of actionable changes is small and a human can leve
 
 The report can be presented and shared as a Google Doc to allow users to sort, search, modify as needed.
 
-An early example <https://docs.google.com/spreadsheets/d/1GWxwEtM0EOyoPP5RUrf1oQCtIVz1re-8n0Be4Kybt8E/edit?gid=0#gid=0>
+* Examples <https://drive.google.com/drive/folders/1vyJO7ZIkG5UBx9kC7mX0ZZ0kyiOrI9OU>
+* Production: <https://docs.google.com/spreadsheets/d/1eCTfhzhlOZ-25mLVNeaq-VGaSOtnL7ZWISVg8a8demY/edit?usp=drive_link>
 
 The header includes:
 
